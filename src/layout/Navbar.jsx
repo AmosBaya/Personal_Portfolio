@@ -15,7 +15,7 @@ export const Navbar = () => {
     const [isMobileMenueOpen, setIsMobileMenueOpen] = useState(false);
 
     return (
-    <header className="fixed top-0 right-0 left-0 bg-transparent py-5">
+    <header className="fixed top-0 right-0 left-0 bg-transparent py-5 z-50">
         <nav className="container mx-auto px-6 flex items-center justify-between">
             {/**tracking-tight-> later spacing to be tight */}
             <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
