@@ -1,5 +1,5 @@
 import {Button} from "@/components/Button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton"
 import { ChevronDown } from "lucide-react";
@@ -112,7 +112,10 @@ export const Hero = () => {
                             <Button size="lg">
                                 Contact Me <ArrowRight className="w-5 h-5"/>
                             </Button>
-                            <AnimatedBorderButton /> 
+                            <AnimatedBorderButton>
+                                <Download className="w-5 h-5"/>
+                                Download CV
+                            </AnimatedBorderButton> 
                         </div>
 
                         {/**Social Links */}
