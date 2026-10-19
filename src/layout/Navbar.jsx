@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button"
 import { X } from "lucide-react"
 import { Menu } from "lucide-react"
+import { useEffect } from "react"
 import { useState } from "react"
 
 const navLinks = [
@@ -13,9 +14,31 @@ const navLinks = [
 export const Navbar = () => {
 
     const [isMobileMenueOpen, setIsMobileMenueOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(()=> {
+        const handleScroll = () =>{
+
+            setIsScrolled(window.scrollY > 50)
+
+            {/** Meaning of above logic 
+            if(window.scrollY > 50){
+                setIsScrolled(true);
+            }else{
+                setIsScrolled(false)
+            }
+            */}
+        }
+
+        window.addEventListener("scroll", handleScroll);
+
+        // prevent memory leaks
+        // by returning and unsubscribing to the event listener when the component unmounts
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-    <header className="fixed top-0 right-0 left-0 bg-transparent py-5 z-50">
+    <header className={`fixed top-0 right-0 left-0 transition-all duration-500 ${isScrolled ? "glass-strong py-3" : "bg-transparent py-5"} z-50`}>
         <nav className="container mx-auto px-6 flex items-center justify-between">
             {/**tracking-tight-> later spacing to be tight */}
             <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
@@ -54,7 +77,8 @@ export const Navbar = () => {
                 {navLinks.map((link, index)=>(
                     <a 
                         href={link.href} 
-                        key={index} 
+                        key={index}
+                        onClick={()=> setIsMobileMenueOpen(false)} 
                         className="text-lg py-2 text-muted-foreground hover:text-foreground "
                     >
                         {link.label}
@@ -62,7 +86,9 @@ export const Navbar = () => {
                 ))}
 
                 {/**CTA BUTTON */}
-                <Button>Contact Me</Button>
+                <Button onClick={()=> setIsMobileMenueOpen(false)} >
+                    Contact Me
+                </Button>
             
             </div>
         </div>)}
